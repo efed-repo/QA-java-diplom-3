@@ -15,7 +15,7 @@ public class ResetPasswordPage {
         this.driver = driver;
     }
 
-    private LoginPage clickLoginLink() {
+    public LoginPage clickLoginLink() {
         driver.findElement(loginLink).click();
         return new LoginPage(driver);
     }

@@ -11,18 +11,25 @@ public class ProfilePage {
     private final By headerBurgerLogo = By.xpath("//div[@class='AppHeader_header__logo__2D0X2']");
     //Кнопка Конструктор
     public final By builderButton = By.xpath("//p[text()='Конструктор']");
+    //Выход
+    public final By LogOutButton = By.xpath("//button[text() = 'Выход']");
 
     public ProfilePage(WebDriver driver) {
         this.driver = driver;
     }
 
-    private MainPage clickOnSiteLogo() {
+    public MainPage clickOnSiteLogo() {
         driver.findElement(headerBurgerLogo).click();
         return new MainPage(driver);
     }
 
-    private MainPage clickOnBuilderButton() {
+    public MainPage clickOnBuilderButton() {
         driver.findElement(builderButton).click();
         return new MainPage(driver);
+    }
+
+    public RegistrationPage logOut (){
+        driver.findElement(LogOutButton).click();
+        return new RegistrationPage(driver);
     }
 }
