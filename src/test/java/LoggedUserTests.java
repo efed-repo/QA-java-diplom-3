@@ -24,7 +24,6 @@ public class LoggedUserTests extends BaseTest {
         loginPage = new LoginPage(driver);
         loginPage.userLogin(USER_EMAIL, USER_PASSWORD);
         profilePage = new ProfilePage(driver);
-
     }
 
     @Test
@@ -47,7 +46,6 @@ public class LoggedUserTests extends BaseTest {
     @DisplayName("Проверка активного раздела Булки")
     public void selectBunSectionTest() {
         profilePage.clickOnBuilderButton()
-                .clickOnBuns()
                 .checkActiveBuilderSection("Булки");
     }
 

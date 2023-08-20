@@ -73,5 +73,6 @@ public class LoginTests extends BaseTest {
     @Override
     public void teardown() {
         deleteTestUserFromApi(response);
+        super.teardown();
     }
 }

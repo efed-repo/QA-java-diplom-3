@@ -2,8 +2,11 @@ package PageObject;
 
 import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
+import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage {
     private WebDriver driver;
@@ -14,10 +17,6 @@ public class LoginPage {
     private final By passwordField = By.xpath("//label[.='Пароль']/../input");
     //кнопка Войти
     private final By loginButton = By.xpath("//button[text()='Войти']");
-    // кнопка Зарегистрироваться
-    private final By registrationButton = By.xpath("//a[text() ='Зарегистрироваться']");
-    //ссылка Восстановить пароль
-    private final By resetPasswordLink = By.xpath("//a[text()='Восстановить пароль']");
 
 
     public LoginPage(WebDriver driver) {
@@ -25,7 +24,7 @@ public class LoginPage {
     }
 
     @Step
-    @DisplayName("Залогиниться потзователем")
+    @DisplayName("Залогиниться пользователем")
     public void userLogin(String email, String password) {
         driver.findElement(emailField).sendKeys(email);
         driver.findElement(passwordField).sendKeys(password);
@@ -34,22 +33,10 @@ public class LoginPage {
     }
 
     @Step
-    @DisplayName("Перейти на страницу регистрации")
-    public RegistrationPage goToRegistrationPage() {
-        driver.findElement(registrationButton).click();
-        return new RegistrationPage(driver);
-    }
-
-    @Step
-    @DisplayName("Перейти на страницу восстановления пароля")
-    public ResetPasswordPage clickResetPasswordLink() {
-        driver.findElement(resetPasswordLink).click();
-        return new ResetPasswordPage(driver);
-    }
-
-    @Step
     @DisplayName("Проверить видимость кнопки Войти на странице логина")
     public LoginPage checkVisibilityOfLoginButton() {
+        new WebDriverWait(driver, Duration.ofSeconds(3))
+                .until(ExpectedConditions.elementToBeClickable(loginButton));
         driver.findElement(loginButton).isDisplayed();
         return this;
     }

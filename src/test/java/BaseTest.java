@@ -8,7 +8,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 
 import static Helpers.Urls.*;
 import static io.restassured.RestAssured.given;
@@ -20,9 +19,7 @@ public class BaseTest {
     @Before
     @DisplayName("Подготовить браузер")
     public void setUp() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-debugging-port=9222");
-        driver = new ChromeDriver(options);
+        driver = new ChromeDriver();
         driver.manage().window().maximize();
     }
 
