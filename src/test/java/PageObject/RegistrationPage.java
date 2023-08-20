@@ -1,5 +1,7 @@
 package PageObject;
 
+import io.qameta.allure.Step;
+import io.qameta.allure.junit4.DisplayName;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -23,7 +25,9 @@ public class RegistrationPage {
         this.driver = driver;
     }
 
-    public LoginPage userRegistration (String name,String email,String password){
+    @Step
+    @DisplayName("Зарегистрировать пользователя")
+    public LoginPage userRegistration(String name, String email, String password) {
         driver.findElement(nameField).sendKeys(name);
         driver.findElement(emailField).sendKeys(email);
         driver.findElement(passwordField).sendKeys(password);
@@ -31,12 +35,16 @@ public class RegistrationPage {
         return new LoginPage(driver);
     }
 
-    public RegistrationPage checkPasswordError(){
+    @Step
+    @DisplayName("Проверить, отображение ошибки о некорректном пароле")
+    public RegistrationPage checkPasswordError() {
         driver.findElement(passwordError).isDisplayed();
         return this;
     }
 
-    public LoginPage clickLoginLink (){
+    @Step
+    @DisplayName("Перейти в регистрации через страницу логина")
+    public LoginPage clickLoginLink() {
         driver.findElement(loginLink).click();
         return new LoginPage(driver);
     }
