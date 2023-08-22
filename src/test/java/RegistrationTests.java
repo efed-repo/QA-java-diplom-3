@@ -2,6 +2,7 @@ import PageObject.LoginPage;
 import PageObject.RegistrationPage;
 import com.github.javafaker.Faker;
 import io.qameta.allure.junit4.DisplayName;
+import io.restassured.response.Response;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,6 +29,7 @@ public class RegistrationTests extends BaseTest {
     public void registrationOfNewUserTest() {
         regPage.userRegistration(USER_NAME, RandomUserEmail, USER_PASSWORD);
         loginPage.checkVisibilityOfLoginButton();
+        deleteUserCreatedByUi(RandomUserEmail, USER_PASSWORD);
     }
 
     @Test

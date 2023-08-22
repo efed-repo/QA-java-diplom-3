@@ -1,5 +1,7 @@
 package PageObject;
 
+import static org.junit.Assert.assertEquals;
+
 import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
 import org.openqa.selenium.By;
@@ -62,10 +64,13 @@ public class MainPage {
         return this;
     }
 
-    @Step("Сравнить актуальное и ожидаемое название активного раздела")
-    public boolean checkActiveBuilderSection(String section) {
-        return driver.findElement(activeSection).getText().equals(section);
+    @Step
+    @DisplayName("Сравнить актуальное и ожидаемое название активного раздела")
+    public void checkActiveBuilderSection(String section) {
+        String actual = driver.findElement(activeSection).getText();
+        assertEquals(section,actual);
     }
+
     @Step
     @DisplayName("Проверить, что пользователь залогинен - видна кнопка Сделать заказ")
     public MainPage checkUserIsLogin() {

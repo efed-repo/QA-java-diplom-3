@@ -1,3 +1,9 @@
+import static Helpers.Urls.AUTH_USER_API;
+import static Helpers.Urls.CREATE_USER_API;
+import static Helpers.Urls.LOGIN_USER_API;
+import static Helpers.Urls.MAIN_PAGE;
+import static io.restassured.RestAssured.given;
+
 import Helpers.CreateUserByApiRequestModel;
 import com.github.javafaker.Faker;
 import io.qameta.allure.Step;
@@ -9,10 +15,8 @@ import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import static Helpers.Urls.*;
-import static io.restassured.RestAssured.given;
-
 public class BaseTest {
+
     WebDriver driver;
     private static final Faker faker = new Faker();
 
@@ -63,6 +67,20 @@ public class BaseTest {
                 .header("Authorization", accessToken)
                 .when()
                 .delete(AUTH_USER_API);
+    }
+
+    @Step
+    @DisplayName("")
+    public void deleteUserCreatedByUi(String email, String password) {
+        RestAssured.baseURI = MAIN_PAGE;
+        String requestBody = "{\"email\": \"" + email + "\",\"password\": \"" + password + "\"}";
+        System.out.println(requestBody);
+        Response response = given()
+                .header("Content-type", "application/json")
+                .body(requestBody)
+                .when()
+                .post(LOGIN_USER_API);
+        deleteTestUserFromApi(response);
     }
 }
 

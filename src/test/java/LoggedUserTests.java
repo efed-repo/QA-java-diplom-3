@@ -46,6 +46,8 @@ public class LoggedUserTests extends BaseTest {
     @DisplayName("Проверка активного раздела Булки")
     public void selectBunSectionTest() {
         profilePage.clickOnBuilderButton()
+                .clickOnSauces()
+                .clickOnBuns()
                 .checkActiveBuilderSection("Булки");
     }
 
